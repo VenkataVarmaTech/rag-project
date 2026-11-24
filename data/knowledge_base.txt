@@ -1,0 +1,43 @@
+# Project Chronos: Advanced Cryogenic & Quantum Research Facility
+Internal Operations & Protocol Manual (Rev 4.2 - Confidential)
+
+## 1. Overview and Core Architecture
+Project Chronos is a next-generation quantum computing cluster housed at the sub-surface facility in Tromsø, Norway. The facility operates three 1,024-qubit quantum processing units (QPUs), codenamed Aegis-1, Aegis-2, and Boreas. Each QPU relies on superconducting transmon qubits fabricated from high-purity niobium-titanium thin films on sapphire substrates.
+
+The primary objective of Project Chronos is to achieve fault-tolerant surface code error correction and simulate complex molecular dynamics for room-temperature superconductor discovery.
+
+## 2. Cryogenic Subsystems and Operating Temperatures
+The quantum processors must be kept at sub-Kelvin temperatures to prevent thermal excitation and maintain qubit coherence. The cryogenic system consists of five staged cooling regions:
+- Stage 1 (Outer Vacuum Chamber): Maintained at 50 Kelvin via dual Gifford-McMahon (GM) cryocoolers.
+- Stage 2 (Thermal Shield): Maintained at 4 Kelvin using liquid Helium-4 closed-loop vapor cycles.
+- Stage 3 (Still Plate): Regulated at 800 milliKelvin (mK) for preliminary phase separation of Helium-3/Helium-4 mixtures.
+- Stage 4 (Cold Plate): Operates at 100 mK.
+- Stage 5 (Mixing Chamber / Quantum Base): The lowest stage where the QPU dies are mounted. This stage must strictly remain between 12 mK and 15 mK. If the mixing chamber temperature exceeds 18.5 mK, an automated thermal quench alarm triggers.
+
+## 3. Qubit Calibration and Coherence Metrics
+- T1 (Longitudinal Relaxation Time): Baseline target is 145 microseconds across all active physical qubits. Any qubit exhibiting T1 below 85 microseconds is automatically disabled from the active parity lattice.
+- T2 (Transverse Dephasing Time): Baseline target is 120 microseconds with dynamical decoupling (XY-8 pulse sequences).
+- Two-Qubit Cross-Resonance Gate Fidelity: Currently calibrated at 99.82% using optimized DRAG (Derivative Removal by Adiabatic Gate) pulsing.
+
+Calibration cycles are automatically run every 6 hours by the automated agent named 'Chronos-CalibDaemon'. If calibration drift exceeds 0.05% in gate fidelity, recalibration mode halts all active user queue experiments.
+
+## 4. Emergency Protocols and Hazardous Scenarios
+### Protocol E-1: Helium Loss / Vacuum Breach
+In the event of a vacuum degradation in Stage 1 where pressure rises above 1e-4 mbar:
+1. The emergency isolation valves (V-101 and V-102) must be engaged within 45 seconds.
+2. The primary turbo-molecular pumps will automatically shut down to avoid turbine blade destruction.
+3. Technicians must evacuate Chamber Hall B immediately via Emergency Airlock Delta.
+4. Access to Chamber Hall B is strictly prohibited until the atmospheric oxygen level indicator returns above 19.5%.
+
+### Protocol E-2: Rapid Magnet Quench
+If a superconducting solenoid quench occurs:
+- The burst disc (BD-9) will rupture, routing expanding helium gas through the 12-inch stainless exhaust stack to the exterior vent roof.
+- The safety officer on duty must verify that the quench line pressure does not exceed 3.5 bar.
+- Do not attempt manual valve overrides during an active quench venting sequence.
+
+## 5. Security Credentials and Access Hierarchy
+- Level 1 (Visitor / Operations Staff): General monitoring dashboard access. No physical entry into Chamber Hall B.
+- Level 2 (Research Fellow): Remote submission of quantum assembly jobs via the Chronos-SDK.
+- Level 3 (Cryo-Engineer): Physical access to the cryostat infrastructure, helium transfer manifolds, and pulse generators.
+- Level 4 (Facility Director - Dr. Astrid Lindholm): Full administrative override, emergency shutoff authorization, and crypto-key rotation. Access passphrase format: Alpha-Nine-Omega-Followed by dynamic OTP.
+

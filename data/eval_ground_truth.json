@@ -1,0 +1,28 @@
+[
+  {
+    "query": "What is the maximum allowed temperature for the mixing chamber before an alarm triggers?",
+    "expected_keywords": ["18.5 mK", "mixing chamber", "alarm", "quench"],
+    "ground_truth_answer": "The mixing chamber must remain between 12 mK and 15 mK. If the temperature exceeds 18.5 mK, an automated thermal quench alarm triggers."
+  },
+  {
+    "query": "What are the emergency isolation valves that must be engaged during a vacuum breach?",
+    "expected_keywords": ["V-101", "V-102", "45 seconds", "isolation valves"],
+    "ground_truth_answer": "In the event of a vacuum degradation, isolation valves V-101 and V-102 must be engaged within 45 seconds."
+  },
+  {
+    "query": "Who is the facility director and what is the required passphrase format?",
+    "expected_keywords": ["Dr. Astrid Lindholm", "Alpha-Nine-Omega", "dynamic OTP", "Level 4"],
+    "ground_truth_answer": "The facility director is Dr. Astrid Lindholm with Level 4 clearance. The passphrase format is Alpha-Nine-Omega followed by dynamic OTP."
+  },
+  {
+    "query": "What are the baseline target metrics for physical qubit coherence T1 and T2?",
+    "expected_keywords": ["145 microseconds", "120 microseconds", "T1", "T2"],
+    "ground_truth_answer": "Baseline target for T1 is 145 microseconds, and baseline target for T2 is 120 microseconds with dynamical decoupling."
+  },
+  {
+    "query": "What is the price of a hamburger in the staff cafeteria?",
+    "expected_keywords": ["cannot answer", "not contain", "does not contain"],
+    "ground_truth_answer": "The provided documentation does not contain cafeteria or food pricing information."
+  }
+]
+
